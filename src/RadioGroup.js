@@ -1,19 +1,18 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class RadioGroup extends Component {
-  renderChildren = () => {
-    const { children, name } = this.props
-
-    return React.Children.map(children, child => {
-      return React.cloneElement(child, {
-        name
-      })
-    })
+  getChildContext() {
+    return { name: this.props.name }
   }
 
   render() {
-    return <div class="radio-group">{this.renderChildren()}</div>
+    return <div>{this.props.children}</div>
   }
+}
+
+RadioGroup.childContextTypes = {
+  name: PropTypes.string,
 }
 
 export default RadioGroup
